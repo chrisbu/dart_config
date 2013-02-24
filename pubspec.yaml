@@ -11,5 +11,5 @@ authors:
 homepage: https://github.com/chrisbu/dart_config
 dependencies:
   unittest: any
-  yaml: any
-  browser: any
+  yaml: ">=0.3.7+6 <0.3.8"
+  browser: ">=0.3.7+6 <0.3.8"
