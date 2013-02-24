@@ -24,13 +24,13 @@ or running Dart on the server.
 
 ### Instructions
 
-1. Add a dependency to `pubspec.yaml` for `dart_config`:
+**1.** Add a dependency to `pubspec.yaml` for `dart_config`:
 
     dependencies
       dart_config: any
       
-2a. If you are running in the **browser**, add the following code to
-your app to load config information from the server:
+**2.** If you are running in the **browser**, add the following code to
+  your app to load config information from the server:
 
     import 'package:dart_config/default_browser.dart';
     
@@ -43,7 +43,7 @@ your app to load config information from the server:
         onError: (error) => print(error));
     }
     
-2b. If you are running in the **server**, add the following code to your app to
+**2.** If you are running in the **server**, add the following code to your app to
 load config information from the filesystem:
  
     import 'package:dart_config/default_server.dart';
