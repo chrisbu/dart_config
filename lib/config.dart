@@ -18,6 +18,7 @@ class Config  {
   final ConfigParser _configParser;
   final String _configPathOrUrl;
   
+  // [configValues is only populated once [readConfig]'s future is completed
   var configValues;
   
   /**
@@ -60,7 +61,6 @@ class Config  {
  * (in client side Dart) are just two possible locations.
  */
 abstract class ConfigLoader {
-  
   
   /**
    * A config loader will load the config data from the [pathOrUrl], and
