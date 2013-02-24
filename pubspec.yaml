@@ -1,0 +1,12 @@
+name: dart_config
+description: 
+  A set of libraries designed to provide configuration to Dart applications.
+  Using dependency injection, the same library API can load config information
+  from the filesystem and httprequest, formatted as JSON or YAML.  Customization 
+  with additional providers is also possible by implementing 
+  two simple interfaces.
+author: Chris Buckett <chrisbuckett@gmail.com>
+dependencies:
+  unittest: any
+  yaml: any
+  browser: any
