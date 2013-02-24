@@ -27,6 +27,8 @@ var loaderImpl;
 // A list of keys that should be in the pathMap
 final SIMPLE_CONFIG_JSON = "SIMPLE_CONFIG_JSON";
 final SIMPLE_CONFIG_YAML = "SIMPLE_CONFIG_YAML";
+final NESTED_CONFIG_JSON = "NESTED_CONFIG_JSON";
+final NESTED_CONFIG_YAML = "NESTED_CONFIG_YAML";
 
 // This is the method 
 void runTests() {
@@ -41,10 +43,24 @@ void _jsonTests() {
           loaderImpl,
           new JsonConfigParser());
       
+     
       var future = config.readConfig();
       expect(future, completion(containsPair("key","value")));
     });
     
+    
+    test("nested keys and values", () {
+      var config = new Config(pathMap[NESTED_CONFIG_JSON], 
+          loaderImpl,
+          new JsonConfigParser());      
+      
+      var expectedMap = {"key": {"key2":"value"}};
+      var mapMatcher = new MapMatcher(expectedMap);
+      
+      
+      var future = config.readConfig();
+      expect(future, completion(mapMatcher));
+    });
   });
 }
 
@@ -59,5 +75,108 @@ void _yamlTests() {
       var future = config.readConfig();
       expect(future, completion(containsPair("key","value")));
     });
+    
+    test("nested keys and values", () {
+      var config = new Config(pathMap[NESTED_CONFIG_YAML], 
+          loaderImpl,
+          new YamlConfigParser());      
+      
+      var expectedMap = {"key": {"key2":"value"}};
+      var mapMatcher = new MapMatcher(expectedMap);
+      
+      
+      var future = config.readConfig();
+      expect(future, completion(mapMatcher));
+    });
   });
+}
+
+
+
+
+/*
+ * Recursively compares two maps, using brute-force, 
+ * irrespecitve of order
+ */
+class MapMatcher implements Matcher {
+  var _map;
+  
+  
+  MapMatcher(this._map);
+
+  // JSON parse the item back into a map, and compare the two maps
+  // (brute force, innefficient)
+  bool matches(Map item, MatchState matchState) {
+    var result = true;
+    
+    // try and compare the item and the map
+    return _mapsAreEqual(item, _map);       
+    
+  }
+  
+  Description describe(Description description) {
+    description.add("_map: ${_map.toString()}");
+    return description;
+  }
+  
+  Description describeMismatch(item, Description mismatchDescription,
+                               MatchState matchState, bool verbose) {
+    mismatchDescription.add("item: ${item.toString()}");
+    return mismatchDescription;
+    
+  }
+  
+  bool _listsAreEqual(List one, List two) {
+    var i = -1;
+    return one.every((element) {
+      i++;
+
+      return two[i] == element;
+    });
+  }
+  
+  bool _mapsAreEqual(Map one, Map two) {
+    var result = true;
+    
+    one.forEach((k,v) {
+      if (two[k] != v) {
+        
+        if (v is List) {
+          if (!_listsAreEqual(one[k], v)) {
+            result = false;
+          }
+        }
+        else if (v is Map) {
+          if (!_mapsAreEqual(one[k], v)) {
+            result = false;
+          }
+        }
+        else {
+          result = false;
+        }
+        
+      }
+    });
+    
+    two.forEach((k,v) {
+      if (one[k] != v) {
+        
+        if (v is List) {
+          if (!_listsAreEqual(two[k], v)) {
+            result = false;
+          }
+        }
+        else if (v is Map) {
+          if (!_mapsAreEqual(two[k], v)) {
+            result = false;
+          }
+        }
+        else {
+          result = false;
+        }
+      }
+    });
+    
+    return result;
+  }
 }

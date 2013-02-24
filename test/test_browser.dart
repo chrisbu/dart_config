@@ -14,7 +14,9 @@ main() {
   useHtmlConfiguration();
  
   tests.pathMap[tests.SIMPLE_CONFIG_JSON] = "configs/testsimpleconfig.json";
+  tests.pathMap[tests.NESTED_CONFIG_JSON] = "configs/testnestedconfig.json";
   tests.pathMap[tests.SIMPLE_CONFIG_YAML] = "configs/testsimpleconfig.yaml";
+  tests.pathMap[tests.NESTED_CONFIG_YAML] = "configs/testnestedconfig.yaml";
   tests.loaderImpl = new ConfigHttpRequestLoader();
   tests.runTests();
 }

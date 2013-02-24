@@ -6,7 +6,8 @@ description:
   from the filesystem and httprequest, formatted as JSON or YAML.  Customization 
   with additional providers is also possible by implementing 
   two simple interfaces.
-author: Chris Buckett <chrisbuckett@gmail.com>
+authors: 
+- Chris Buckett <chrisbuckett@gmail.com>
 homepage: https://github.com/chrisbu/dart_config
 dependencies:
   unittest: any
