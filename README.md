@@ -93,15 +93,15 @@ implementation of `ConfigLoader`, and the third is an implementation of
 The `dart_config` library comes (at the moment) with two ConfigLoader 
 implementations and two ConfigParser implementations:
  
-`ConfigLoaders`:
+[`ConfigLoaders`](https://github.com/chrisbu/dart_config/tree/master/lib/loaders):
  
-- ConfigFilesystemLoader
-- ConfigHttpRequestLoader
+- `ConfigFilesystemLoader`
+- `ConfigHttpRequestLoader`
 
-`ConfigParsers`:
+[`ConfigParsers`](https://github.com/chrisbu/dart_config/tree/master/lib/parsers):
 
-- YamlConfigParser
-- JsonConfigParser
+- `YamlConfigParser`
+- `JsonConfigParser`
 
 You can use any combination of loader and parser.  At its core, the config 
 system needs to know **how to load a config file** and **how to parse a config
@@ -110,7 +110,7 @@ file**.  It really is no more complex than that.
 Take a look at the three files: `tests.dart` (a VM independant suite of tests), 
 and the `test_browser.dart` and `test_server.dart`, which run the same set of 
 tests found in `tests.dart` both in the browser and on the server.  The only
-differences are `ConfgLoader` implementation, and the path to the config files.
+differences are `ConfigLoader` implementation, and the path to the config files.
 
 ### Want to load a config file that looks like "x"?
 
@@ -140,7 +140,9 @@ Some ideas (that I might work on if someone else doesn't get there first):
   
 ### Found a bug?  
 
-Raise an issue and I'll take a look, or even better, create a pull request with
+Raise an [issue on github](https://github.com/chrisbu/dart_config/issues) 
+and I'll take a look, or even better, create 
+a [pull request](https://github.com/chrisbu/dart_config/pulls) with
 a failing unit test or even a fix?
 
 ### Got a question?
