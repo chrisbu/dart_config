@@ -20,7 +20,7 @@ class ConfigFilesystemLoader extends ConfigLoader {
     file.exists().then(
         (exists) {
           if (exists) {
-            file.open(FileMode.READ).then(
+            file.open(mode: FileMode.READ).then(
                 (RandomAccessFile f) {
                   f.length().then(
                       (length) {
