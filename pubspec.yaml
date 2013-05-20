@@ -5,5 +5,4 @@ description: A set of libraries designed to provide configuration to Dart applic
 homepage: https://github.com/chrisbu/dart_config
 dependencies:
   unittest: any
-  yaml: '>=0.4.2 <0.5.0'
-  browser: '>=0.3.7+6 <0.3.8'
+  yaml: '>=0.4.2'
