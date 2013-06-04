@@ -2,7 +2,6 @@ library config_loader_httprequest;
 
 import 'dart:io';
 import 'dart:async';
-import 'dart:uri';
 import '../config.dart';
 
 
