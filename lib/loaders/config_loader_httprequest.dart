@@ -2,7 +2,6 @@ library config_loader_filesystem;
 
 import 'dart:html';
 import 'dart:async';
-import 'dart:uri';
 import '../config.dart';
 
 class ConfigHttpRequestLoader extends ConfigLoader {
