@@ -2,20 +2,19 @@ library config_loader_httprequest;
 
 import 'dart:io';
 import 'dart:async';
-import 'dart:uri';
 import '../config.dart';
 
 
 class ConfigFilesystemLoader extends ConfigLoader {
-  
+
   /**
-   * A config loader will load 
+   * A config loader will load
    */
   Future<String> loadConfig(String path) {
     var completer = new Completer<String>();
-    
+
     var errorHandler = (error) => completer.completeError(error);
-    
+
     var file = new File(path);
     file.exists().then(
         (exists) {
@@ -28,9 +27,9 @@ class ConfigFilesystemLoader extends ConfigLoader {
                           var configText = new String.fromCharCodes(buffer);
                           completer.complete(configText);
                         }, onError: errorHandler);
-                      }, 
+                      },
                       onError: errorHandler);
-                }, 
+                },
                 onError: errorHandler);
           }
           else {
@@ -38,10 +37,10 @@ class ConfigFilesystemLoader extends ConfigLoader {
           }
         },
         onError: errorHandler);
-    
-    
+
+
     return completer.future;
   }
-  
-  
+
+
 }
