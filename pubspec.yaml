@@ -1,8 +1,10 @@
 name: dart_config
-version: 0.3.0+2
+version: 0.3.0+3
 author: Chris Buckett <chrisbuckett@gmail.com>
 description: A set of libraries designed to provide configuration to Dart applications. Using dependency injection, the same library API can load config information from the filesystem and httprequest, formatted as JSON or YAML.  Customization with additional providers is also possible by implementing two simple interfaces.
 homepage: https://github.com/chrisbu/dart_config
 dependencies:
   unittest: any
   yaml: '>=0.4.2'
+dev_dependencies:
+  browser: any
