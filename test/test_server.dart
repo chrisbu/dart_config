@@ -10,6 +10,7 @@ main() {
   tests.pathMap[tests.NESTED_CONFIG_JSON] = "configs/testnestedconfig.json";
   tests.pathMap[tests.SIMPLE_CONFIG_YAML] = "configs/testsimpleconfig.yaml";
   tests.pathMap[tests.NESTED_CONFIG_YAML] = "configs/testnestedconfig.yaml";
+  tests.pathMap[tests.TEMP_CONFIG_YAML] = "configs/testtempconfig.yaml";
   tests.loaderImpl = new ConfigFilesystemLoader();
   tests.runTests();
 }

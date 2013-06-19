@@ -17,7 +17,8 @@ import "package:unittest/unittest.dart";
 import 'package:dart_config/parsers/config_parser_json.dart';
 import 'package:dart_config/parsers/config_parser_yaml.dart';
 import 'package:dart_config/config.dart';
-
+import 'dart:io';
+import 'dart:async';
 
 final pathMap = new Map<String,String>();
 var loaderImpl;
@@ -29,6 +30,7 @@ final SIMPLE_CONFIG_JSON = "SIMPLE_CONFIG_JSON";
 final SIMPLE_CONFIG_YAML = "SIMPLE_CONFIG_YAML";
 final NESTED_CONFIG_JSON = "NESTED_CONFIG_JSON";
 final NESTED_CONFIG_YAML = "NESTED_CONFIG_YAML";
+final TEMP_CONFIG_YAML = "TEMP_CONFIG_YAML";
 
 // This is the method
 void runTests() {
@@ -89,6 +91,35 @@ void _yamlTests() {
       expect(future, completion(mapMatcher));
     });
   });
+  
+  group("temp config:", () {
+    File tempConfigFile = new File(pathMap[TEMP_CONFIG_YAML]);
+    setUp(() {
+      var writer = tempConfigFile.openWrite();
+      writer.writeln('message: This file will be deleted.');
+      return writer.close();
+    });
+    
+    test("delete config after read", () {
+      var config = new Config(pathMap[TEMP_CONFIG_YAML],
+          loaderImpl,
+          new YamlConfigParser());
+            
+      var future = config.readConfig().then(
+          (res) {
+            expect(res, containsPair("message","This file will be deleted."));
+            var completer = new Completer<bool>();
+            tempConfigFile.delete()
+            .then((f) => f.exists())
+            .then((exists) => completer.complete(exists))
+            .catchError((e) => completer.completeError(e));
+            return completer.future;
+        }
+      );
+      expect(future, completion(equals(false)));
+    });
+  });
+
 }
 
 
