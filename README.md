@@ -121,14 +121,14 @@ parser you specify.
 
 ### Want to parse a config file of type "y"?
 
-No problem again - simply implement your own version of `ConfogParser` - there's
+No problem again - simply implement your own version of `ConfigParser` - there's
 only one method: `Future<Map<String,Object>> parse(String configText)` - just
 parse the String contents that the ConfigLoader has loaded into a Map, and 
 return it in a Future.
 
 ### Written your own config loader / parser?
 
-Great! - Please share :) - create your own pub packaged containing loaders and/
+Great! - Please share :) - create your own pub package containing loaders and/
 or parsers, or clone this library and issue pull requests. 
 
 Some ideas (that I might work on if someone else doesn't get there first):
