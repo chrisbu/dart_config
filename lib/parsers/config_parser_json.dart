@@ -1,7 +1,7 @@
 library config_parser_json;
 
 import 'dart:async';
-import 'dart:json' as JSON;
+import 'package:json/json.dart' as JSON;
 
 import '../config.dart';
 

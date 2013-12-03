@@ -25,8 +25,13 @@ class ConfigFilesystemLoader extends ConfigLoader {
                       (length) {
                         f.read(length).then((List<int> buffer) {
                           var configText = new String.fromCharCodes(buffer);
-                          completer.complete(configText);
-                        }, onError: errorHandler);
+                          f.close().then(
+                              (f) {
+                                completer.complete(configText);
+                              }, 
+                              onError: errorHandler);
+                        },
+                        onError: errorHandler);
                       }, 
                       onError: errorHandler);
                 }, 
