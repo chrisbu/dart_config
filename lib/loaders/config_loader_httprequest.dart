@@ -20,6 +20,20 @@ class ConfigHttpRequestLoader extends ConfigLoader {
     
     return completer.future;
   }
-  
-  
+
+  String loadConfigSync(String path) {
+    String result = "";
+
+    HttpRequest request = new HttpRequest();
+    request.open('GET', path, async : false);
+    request.send();
+    result = request.responseText;
+
+    if (request.statusText != "OK") {
+      print("Synchronous config load of $path was not possible");
+    }
+
+    return result;
+  }
+
 }

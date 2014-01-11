@@ -52,7 +52,16 @@ class Config  {
     
     return completer.future;
   }
-  
+
+  /**
+  * Same as readConfig but synchronously
+  */
+  Map readConfigSync() {
+    // load, then parse, then complete
+    configValues = _configParser.parseSync(_configLoader.loadConfigSync(_configPathOrUrl));
+    return configValues;
+  }
+
 }
 
 /**
@@ -68,6 +77,10 @@ abstract class ConfigLoader {
    */
   Future<String> loadConfig(pathOrUrl);
 
+  /**
+  * Similar but synchronous
+  */
+  String loadConfigSync(pathOrUrl);
 }
 
 /**
@@ -77,9 +90,21 @@ abstract class ConfigLoader {
  * `int`, `num`, `double`, `String`, `bool`, `null`.
  */
 abstract class ConfigParser {
-  
+
   /**
    * Returns a Config object from the parsed config file.
    */
-  Future<Map<String,Object>> parse(String configText);
+  Future<Map<String,Object>> parse(String configText) {
+    var completer = new Completer<Map>();
+
+    var map = parseSync(configText);
+    completer.complete(map);
+
+    return completer.future;
+  }
+
+  /**
+  * Similar but synchronously
+  */
+  Map<String,Object> parseSync(String configText);
 }
