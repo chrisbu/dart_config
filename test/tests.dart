@@ -106,7 +106,7 @@ class MapMatcher implements Matcher {
 
   // JSON parse the item back into a map, and compare the two maps
   // (brute force, innefficient)
-  bool matches(Map item, MatchState matchState) {
+  bool matches(Map item, Map matchState) {
     var result = true;
 
     // try and compare the item and the map
@@ -120,7 +120,7 @@ class MapMatcher implements Matcher {
   }
 
   Description describeMismatch(item, Description mismatchDescription,
-                               MatchState matchState, bool verbose) {
+                               Map matchState, bool verbose) {
     mismatchDescription.add("item: ${item.toString()}");
     return mismatchDescription;
 
