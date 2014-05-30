@@ -12,3 +12,11 @@ Future<Map> loadConfig([String filename="config.yaml"]) {
   
   return config.readConfig();
 }
+
+Map loadConfigSync([String filename="config.yaml"]) {
+  var config = new Config(filename,
+      new ConfigHttpRequestLoader(),
+      new YamlConfigParser());
+
+  return config.readConfigSync();
+}
