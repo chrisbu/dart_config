@@ -8,3 +8,5 @@ dependencies:
   yaml: '>=0.4.2'
 dev_dependencies:
   browser: any
+environment:
+  sdk: '>=1.19.0 <2.1.0'
